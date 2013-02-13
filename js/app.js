@@ -1,3 +1,11 @@
+(function() {
+    
+})();
+
+
+
+
+
 function Bootstrap() {
     console.log('Bootstrap Loaded.');
     var app = angular.module('Application', ['Game']);
