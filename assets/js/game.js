@@ -11,44 +11,65 @@ game.factory('EntityManager', function(Player, util){
             if(!name) {
                 name = "UnnamedEntity"+util.nonce;
             }
+            
         }
     
     return EntityManager;
 });
 
-game.factory('RenderManager', function(util){
+game.factory('RenderHandler', function(util){
     console.log('Render Manager initialized');
+    
     var stage = new createjs.Stage("demoCanvas");
     
-    stage = new createjs.Stage("demoCanvas");
+    var RenderHandler = {};
     
-    //Create a Shape DisplayObject.
-    circle = new createjs.Bitmap('http://icons.iconarchive.com/icons/turbomilk/zoom-eyed-creatures-2/128/linux-icon.png')
-        //Set position of Shape instance.
-    circle.x = circle.y = 50;
-    circle.regX = 64;
-    circle.regY = 64;
-    //Add Shape instance to s
-    stage.addChild(circle);
+    RenderHandler.addEntity = function(entity) {
+        
+        var displayObject = new createjs.Bitmap('http://icons.iconarchive.com/icons/deleket/bioman/128/Bioman-Avatar-2-Green-icon.png');
+        
+        displayObject.onTick = function(a) {
+            angular.forEach(['x','y','rotation'], function(prop) {
+                displayObject[prop] = entity[prop];
+            });
+            
+            displayObject.regX = 80;
+            displayObject.regY = 64;
+        }
+        
+        stage.addChild(displayObject);
+    }
     
-    var RenderManager = {};
-    
-    RenderManager.update = function() {
-        circle.rotation += 1;
+    RenderHandler.update = function() {
         stage.update();
     }
     
-    return RenderManager;
+    return RenderHandler;
 });
 
-game.factory('World', function(EntityManager, Player){
+game.factory('World', function(EntityManager, RenderHandler, CircleMonster) {
+    var World = {};
     
+    var monster = new CircleMonster();
+    
+    $(document).on('mousemove', function(evt) {
+       monster.x = evt.clientX ;
+       monster.y = evt.clientY ;
+    });
+    
+    RenderHandler.addEntity(monster);
+            
+    World.update = function() {
+        RenderHandler.update();
+    }
+    
+    return World;
 });
 
-game.controller('GameCtrl', function($scope, RenderManager, EntityManager, World){
+game.controller('GameCtrl', function($scope, World){
     
     function tick() {
-        RenderManager.update();
+        World.update();
     }
     
     function init() {
