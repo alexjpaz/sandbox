@@ -1,16 +1,12 @@
 <html>
     <head>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="assets/css/style.css" rel="stylesheet">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js"></script>
-        <script src="assets/js/app.js"></script>
+        <link href="/assets/lib/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <script src="/assets/lib/head.min.js"></script>
+        <script src="/assets/js/app.js"></script>
     </head>
     <body>
         <div ng-hide='true'>Loading</div>
-        <div ng-controller='GameCtrl'>
-            <canvas id='demoCanvas' width='640' height='480'></canvas>
-            <input ng-model='rotation' type="range" />
-        </div>
-        <a href='http://blog.sethladd.com/2011/09/box2d-javascript-example-walkthrough.html'>http://blog.sethladd.com/2011/09/box2d-javascript-example-walkthrough.html</a>
+        <div ng-include src="'/games/tic-tac-toe/index.html'"></div>
     </body>
 </html>
