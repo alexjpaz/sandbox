@@ -3,11 +3,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-	return send_from_directory('static', 'index.html')
+    return send_from_directory('static', 'index.html')
 
 @app.route('/hangout')
 def hangout():
-    templ = render_template('hangout.xml')
+    code = file('static/index.html').read();
+    templ = render_template('hangout.xml', code=code)
     return templ
 
 @app.route('/assets/<path:filename>')
