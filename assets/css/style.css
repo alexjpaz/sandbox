@@ -1,0 +1,47 @@
+
+
+.game-tic-tac-toe {
+	margin: 0 auto;
+	width: @size;
+}
+.board {
+	width: 600px;
+	height: 600px;
+	user-select: none;
+	-moz-user-select: none;
+}
+.square {
+	width: 200px;
+	height: 200px;
+	float: left;
+ 	line-height: 200px; 
+	text-align: center;
+ 	font-size: 200px; 
+	cursor: hand;
+	overflow: hidden;
+	outline: 4px solid #aaa;
+}
+
+.square span {
+	font-size: 2em;
+	color: blue;
+}
+
+.square-win {
+	background: green;
+	color: #fdfdfd;
+}
+
+@media (max-width: 480px) {
+    .board {
+        width: 450px;
+        height: 450px;
+    }
+    
+    .square {
+        width: 150px;
+        height: 150px;
+        line-height: 150px;
+        font-size: 150px;
+    }
+}

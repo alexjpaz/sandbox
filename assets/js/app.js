@@ -1,6 +1,6 @@
 function Bootstrap() {
     console.log('Bootstrap Loaded.');
-    var app = angular.module('Application', ['TicTacToeGame']);
+    angular.module('Application', ['TicTacToeGame','Utilities']);
     angular.element(document).ready(function() {
         angular.bootstrap(document, ['Application']);
     });
@@ -9,25 +9,22 @@ function Bootstrap() {
 (function() {
 	var libs = [];
 	function loadjs(path) {
-		libs.push("assets/js/"+path+".js");
+		libs.push("assets/"+path+".js");
 	}
 	
 	function loadextjs(path) {
 		libs.push(path);
 	}
 
-    loadextjs('/assets/lib/angular.js');
-    loadextjs('/assets/lib/log4javascript.js');
-    loadextjs("/assets/lib/jquery.min.js"); 
-    loadextjs("/assets/lib/bootstrap.min.js");
-    loadextjs("/assets/lib/easeljs-0.6.0.min.js");
+    loadjs('lib/angular');
+    loadjs('lib/log4javascript');
+    loadjs('lib/jquery.min'); 
+    loadjs('lib/bootstrap.min');
+    loadjs('lib/less-1.3.3.min')
     
-    loadextjs('/games/tic-tac-toe/tic-tac-toe.js');
+    loadjs('js/utils');
+    loadjs('js/tic-tac-toe');
     
-    
-	loadjs("game");
-	loadjs("entities");
-	loadjs("util");
 	libs.push(Bootstrap);
 	
 	head.js.apply(this, libs);    

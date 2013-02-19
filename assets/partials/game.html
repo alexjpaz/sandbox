@@ -1,0 +1,14 @@
+<div class='game-tic-tac-toe' ng-controller='TicTacToeGameCtrl'>
+	<h1>{{ game.title }}</h1>
+	<div class='board'>
+		<div ng-repeat='b in board.squares' 
+			class='square' 
+			ng-click='board.putMark($index)' ng-class='{"square-win": boardOverlay[$index]}'>{{ b }}</div>
+	</div>
+	<hr />
+	<div class='alert alert-danger' ng-show='exception'> {{ exception }}</div>
+	<div class='alert alert-success' ng-hide='!board.winner'>
+		<span>{{ board.winner.mark }} has won!</span> 
+		<a ng-click='reset()'>Play again?</a>
+	</div>
+</div>

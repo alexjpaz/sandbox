@@ -1,0 +1,48 @@
+@boardSize: 480px;
+
+body {
+    background: url(http://subtlepatterns.com/patterns/ecailles.png);
+}
+
+.test {
+  outline: 10px red dashed;  
+}
+
+
+.game-tic-tac-toe {
+	margin: 0 auto;
+	width: @boardSize;
+}
+.board {
+    margin: 0 auto;
+	width: @boardSize;
+	height:@boardSize;
+	user-select: none;
+	-moz-user-select: none;
+    background: white;
+}
+
+.square {
+	width: @boardSize/3-8;
+	height: @boardSize/3-8;
+	float: left;
+ 	line-height: @boardSize/3-8; 
+	text-align: center;
+ 	font-size: @boardSize/3-8; 
+	cursor: hand;
+	overflow: hidden;
+    border: 4px solid #aaa;
+}
+
+.square:hover {
+}
+
+.square span {
+	font-size: 2em;
+	color: blue;
+}
+
+.square-win {
+	background: green;
+	color: #fdfdfd;
+}
