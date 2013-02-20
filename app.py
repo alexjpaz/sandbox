@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, url_for,render_template, send_from_directory
 app = Flask(__name__)
 
@@ -20,5 +22,6 @@ def hello():
    return "Okay, you aren't crazy"
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.debug = os.environ.get('DEBUG', False)
+    app.run(host='0.0.0.0', port=port)
