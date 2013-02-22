@@ -1,6 +1,11 @@
 @import url('../fonts/EFON-webfont.css');
 
-.test {
+.game-die {
+	float: left;
+}
+
+.symbol {
 	font-family: 'EfonRegular';
 	font-size: 72px;
+	line-height: 72px;
 }

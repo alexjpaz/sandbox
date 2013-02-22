@@ -1,0 +1,9 @@
+<div ng-controller='DiceGameCtrl'>
+	<div class='game-board'>
+		<div class='game-die clearfix' ng-repeat='die in game.board'>
+			<span class='symbol'>{{ die }}</span>
+		</div>
+	</div>
+	<button ng-click='game.rollDie()'>Roll</button>
+	<pre>{{ game | json }}</pre>
+</div>
