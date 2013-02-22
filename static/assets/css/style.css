@@ -1,11 +1,35 @@
 @import url('../fonts/EFON-webfont.css');
 
-.game-die {
-	float: left;
+body {
+	padding-top: 20px;
 }
 
-.symbol {
+.game-container {
+	margin: 0 auto;
+	width: 700px;
+}
+
+.game-board-container {
+	border: 4px #eee solid;
+	border-radius: 8px;
+	width: 384px;
+	margin: 0 auto 20px;;
+}
+
+.game-board {
+	min-height: 96px;
+}
+
+.game-die {
+	width: 72px;
+	height: 72px;
+	display: inline-block;
 	font-family: 'EfonRegular';
-	font-size: 72px;
+	font-size: 48px;
 	line-height: 72px;
+	text-align: center;
+	border: 4px #333 solid;
+	border-radius: 8px;
+	
+	margin: 8px;
 }
