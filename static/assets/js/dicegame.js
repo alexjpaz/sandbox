@@ -75,8 +75,6 @@
 	game.controller('DiceGameSettingsCtrl', function($scope) {
 		$scope.new_settings = angular.copy($scope.settings);
 		
-		$scope.message = "";
-		
 		$scope.saveChanges = function() {
 			$scope.$emit('GameSettingsUpdated', angular.copy($scope.new_settings));
 		};

@@ -1,24 +1,28 @@
 <div id="game-settings-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <form name='gameSettingsForm' ng-controller='DiceGameSettingsCtrl'>
+  <form name='gameSettingsForm' class='form-horizontal' ng-controller='DiceGameSettingsCtrl'>
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    <h3 id="myModalLabel">Dice Game Settings</h3>
 	  </div>
 	  <div class="modal-body">
-	    <div>
-	    	<label>Max number of Die</label>
-	    	<input ng-model='new_settings.maxDie' />
+	    <div class='control-group'>
+	    	<label class='control-label'>Max number of Die</label>
+	    	<div class='controls'>
+	    		<input ng-model='new_settings.maxDie' />
+	    	</div>
 	    </div>
 	    <hr />
-	    <div>
-	    	<label class='text-danger'>Debug Mode</label>
-	    	<input type='checkbox' ng-model='new_settings.debug' />
+	    <div class='control-group'>
+	    	<label class='control-label'><span class='label label-important'>Debug Mode</span></label>
+	    	<div class='controls'>
+	    		<input type='checkbox' ng-model='new_settings.debug' />
+	    	</div>
 	    </div>
 	  </div>
 	  <div class="modal-footer">
 	  	<p class='pull-left text-success'><strong>{{ message }}</strong></p>
 	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    <button class="btn btn-primary" ng-click='saveChanges()'>Save changes</button>
+	    <button class="btn btn-success" ng-click='saveChanges()'>Apply</button>
 	  </div>
   </form>
 </div>
