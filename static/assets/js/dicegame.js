@@ -2,14 +2,12 @@
 	var game = angular.module('DiceGame',['Utilities']);
 	
 	game.factory('DiceGame', function(DiceSet, GameException) {
-		function DiceGame() {
-			this.bag = new DiceSet();
+		function DiceGame(config) {
+			this.bag = new DiceSet(config.maxDie);
 			this.board = [];
-
 		}
 		
 		DiceGame.prototype.rollDie = function() {
-			console.log(Math.random().toString(36).substring(7));
 			if(this.bag.size() == 0) {
 				throw new NoDiceLeftException();
 			}
@@ -26,8 +24,8 @@
 	});
 	
 	game.factory('DiceSet', function() {
-		function DiceSet() {
-			this._set = this.generateSet(10);
+		function DiceSet(maxDie) {
+			this._set = this.generateSet(maxDie);
 			this.__random = {};
 		}
 		
@@ -57,10 +55,31 @@
 	});
 	
 	game.controller('DiceGameCtrl', function($scope, DiceGame){
+		
+		$scope.settings = {
+			maxDie: 9,
+		};
+		
+		
 		$scope.reset = function() {
-			$scope.game = new DiceGame();
-		}
-
+			$scope.game = new DiceGame($scope.settings);
+		};
+		
 		$scope.reset();
+		
+		$scope.$on('GameSettingsUpdated', function(event, settings){
+			$scope.settings = settings;
+		});
 	});
+	
+	game.controller('DiceGameSettingsCtrl', function($scope) {
+		$scope.new_settings = angular.copy($scope.settings);
+		
+		$scope.message = "";
+		
+		$scope.saveChanges = function() {
+			$scope.$emit('GameSettingsUpdated', angular.copy($scope.new_settings));
+		};
+	});
+	
 })();

@@ -16,7 +16,9 @@ function Bootstrap() {
 		libs.push(path);
 	}
 
+	loadjs('lib/jquery-1.9.1.min');
     loadjs('lib/angular');
+    loadjs('lib/bootstrap.min');
     
     loadjs('js/utils');
     loadjs('js/dicegame');

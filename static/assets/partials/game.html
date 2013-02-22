@@ -8,8 +8,14 @@
 		<div class='text-center'>
 			<button class='btn btn-primary' ng-click='game.rollDie()'>Roll</button>
 			<button class='btn' ng-click='reset()'>Reset</button>
+			<button class='btn' data-toggle="modal" data-target="#game-settings-modal" ng-click='openSettings()'><i class='icon-cog'></i></button>
 		</div>
 	</div>
 	<hr />
-	<pre>{{ game | json }}</pre>
+	<div template='game-settings.html'></div>
+	
+	<div ng-show='settings.debug'>
+		<pre>{{ game | json }}</pre>
+		<pre>{{ settings | json }}</pre>	
+	</div>
 </div>
