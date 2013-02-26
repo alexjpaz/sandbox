@@ -1,0 +1,35 @@
+<div id="game-settings-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form name='gameSettingsForm' class='form-horizontal' ng-controller='DiceGameSettingsCtrl'>
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Dice Game Settings</h3>
+	  </div>
+	  <div class="modal-body">
+	    <div class='control-group'>
+	    	<label class='control-label'>Max number of Die</label>
+	    	<div class='controls'>
+	    		<input type='text' ng-model='new_settings.maxDie' />
+	    		<span class='help-inline'>Applied at next game</span>
+	    	</div>
+	    </div>
+	    <div class='control-group'>
+	    	<label class='control-label'>Font Set</label>
+	    	<div class='controls'>
+	    		<select disabled ng-model='new_settings.fontset' ng-options='key as o for (key,o) in fontSet' />
+	    	</div>
+	    </div>
+	    <hr />
+	    <div class='control-group'>
+	    	<label class='control-label'><span class='label label-important'>Debug Mode</span></label>
+	    	<div class='controls'>
+	    		<input type='checkbox' ng-model='new_settings.debug' />
+	    	</div>
+	    </div>
+	  </div>
+	  <div class="modal-footer">
+	  	<p class='pull-left text-success'><strong>{{ message }}</strong></p>
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	    <button class="btn btn-success" ng-click='saveChanges()'>Apply</button>
+	  </div>
+  </form>
+</div>

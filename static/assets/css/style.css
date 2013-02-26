@@ -1,0 +1,23 @@
+body {
+	padding-top: 20px;
+}
+
+.game-container {
+	margin: 0 auto;
+	width: 700px;
+}
+
+media (min-width: 480px) and (max-width: 768px) {
+	
+	.game-container {
+		width: 100%;
+	}
+	
+	.game-board-container {
+		width: auto;
+	}
+}
+
+canvas {
+	outline: 1px dashed blue;
+}

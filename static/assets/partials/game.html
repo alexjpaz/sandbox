@@ -1,0 +1,14 @@
+<div ng-controller='SpaceGameCtrl'>
+	<div class='game-container' ng-click='game.fire()'>
+		<h1 class='text-center'>Space Game</h1>
+		<canvas id='game' width='768' height='420'></canvas>
+		<div class='text-center'>
+			<button class='btn' ng-click='reset()'>Reset</button>
+			<button class='btn' data-toggle="modal" data-target="#game-settings-modal" ng-click='openSettings()'><i class='icon-cog'></i></button>
+		</div>
+	</div>
+	<hr />
+	
+	<div template='game-footer.html'></div>
+	<div template='game-settings.html'></div>
+</div>
