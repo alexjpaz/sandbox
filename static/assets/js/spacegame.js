@@ -1,31 +1,58 @@
 (function(){
 	var game = angular.module('SpaceGame',['SpaceGame.Entities', 'Utilities']);
 	
-	game.factory('SpaceGame', function(RenderHandler, GameException, Player, Missle) {
+	game.factory('SpaceGame', function(EntityManager, RenderHandler, GameException, Player) {
 		function SpaceGame(config) {
 			
 			var p = new Player();
 			
-			
-			RenderHandler.addEntity(p, {
+			EntityManager.addEntity(p, {
 				name: 'Player'
-			});
-			setInterval(RenderHandler.update, 1);
+			})
+			
+			setInterval(RenderHandler.update, 100);
 		}
 		
-		SpaceGame.prototype.fire = function() {
-			console.log('fire missle');
-			
-			var p = RenderHandler.getEntityByname('Player');
-			console.log(p)
-			var m = new Missle();
-			m.displayObject.x = p.displayObject.x;
-			m.displayObject.y = p.displayObject.y;
-			
-			RenderHandler.addEntity(m);
-		};
-		
 		return SpaceGame;
+	});
+	
+	game.factory('InputListener', function(EntityManager) {
+		console.log('InputHanlder initialized.');
+		
+		var player = EntityManager.getPlayer();
+		
+		
+		console.log(player);
+		
+		$(document).on('mousemove', function() {
+		});
+		
+		var InputHandler = {};
+		
+		return InputHandler;
+	});
+	
+	game.factory('EntityManager', function(RenderHandler) {
+		console.log('EntityManager initialized.');
+
+		var entities = {};		
+		
+		var EntityManager = {};
+		
+		EntityManager.getPlayer = function() {
+			return EntityManager.getEntityById['Player'];
+		}
+		
+		EntityManager.addEntityDef = function(entityDef) {
+			
+		}
+		
+		EntityManager.addEntity = function(entity, config) {
+			entities[config.name] = entity;
+			RenderHandler.addEntity(entity, config);
+		}
+		
+		return EntityManager;
 	});
 	
 	game.factory('RenderHandler', function(DisplayEntity, GameException){
@@ -38,7 +65,7 @@
 	    
 	    RenderHandler.addEntity = function(entity, config) {
 	        
-	    	if(!entity.displayObject) {
+	    	if(!entity.skin) {
 	    		throw new InvalidEntityException(entity);
 	    		return;
 	    	}
@@ -52,7 +79,7 @@
 	    	}
 	    	
 	    	entities[config.name] = entity;
-	        stage.addChild(entity.displayObject);
+	        stage.addChild(entity.skin);
 	    }
 	    
 	    RenderHandler.getEntityByname = function(entityName) {

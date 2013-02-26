@@ -33,44 +33,24 @@
 		return DisplayEntity;
 	});
 	
-	game.factory('Player', function(DisplayEntity) {
+	game.factory('Actor', function() {
+		function Actor(config) {
+			this.skin = {};
+			this.body = {};
+		}
+		
+		return Actor;
+	});
+	
+	game.factory('Player', function(Actor) {
 		
 		function Player(config) {
+			Actor.call(this);
 			
-			DisplayEntity.call(this);
-			
-			
-			this.displayObject = new createjs.Shape();
-			this.displayObject.graphics.beginFill("red").drawCircle(200,200,20);
-	        
-			this.displayObject.onTick = function(c) {
-				console.log(this)
-	        	this.x += 0.2;
-	        }
+			this.skin = new createjs.Shape();
+			this.skin.graphics.beginFill("red").drawCircle(200,200,20);
 		}
 		
 		return Player;
 	});
-	
-	game.factory('Missle', function(DisplayEntity) {
-		
-		function Missle(config) {
-			
-			DisplayEntity.call(this);
-			
-			var _displayObject = {};
-			
-			this.displayObject = new createjs.Shape();
-			this.displayObject.graphics.beginFill("blue").drawCircle(200,200,5);
-			
-			var o = this;
-			this.displayObject.onTick = function(c) {
-	        	this.x += 1;
-	        }
-	        
-		}
-		
-		return Missle;
-	});
-	
 })();
