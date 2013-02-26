@@ -39,16 +39,14 @@
 			
 			DisplayEntity.call(this);
 			
-			var _displayObject = {};
 			
-			_displayObject = new createjs.Shape();
-			_displayObject.graphics.beginFill("red").drawCircle(200,200,20);
+			this.displayObject = new createjs.Shape();
+			this.displayObject.graphics.beginFill("red").drawCircle(200,200,20);
 	        
-	        _displayObject.onTick = function(c) {
+			this.displayObject.onTick = function(c) {
+				console.log(this)
 	        	this.x += 0.2;
 	        }
-	        
-	        this.displayObject = _displayObject;
 		}
 		
 		return Player;
@@ -62,14 +60,14 @@
 			
 			var _displayObject = {};
 			
-			_displayObject = new createjs.Shape();
-			_displayObject.graphics.beginFill("blue").drawCircle(0,0,10);
-	        
-	        _displayObject.onTick = function() {
-	        	_displayObject.x += 5;
+			this.displayObject = new createjs.Shape();
+			this.displayObject.graphics.beginFill("blue").drawCircle(200,200,5);
+			
+			var o = this;
+			this.displayObject.onTick = function(c) {
+	        	this.x += 1;
 	        }
 	        
-	        this.displayObject = _displayObject;
 		}
 		
 		return Missle;

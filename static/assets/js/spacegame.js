@@ -10,7 +10,7 @@
 			RenderHandler.addEntity(p, {
 				name: 'Player'
 			});
-			setInterval(RenderHandler.update, 100);
+			setInterval(RenderHandler.update, 1);
 		}
 		
 		SpaceGame.prototype.fire = function() {
@@ -19,8 +19,8 @@
 			var p = RenderHandler.getEntityByname('Player');
 			console.log(p)
 			var m = new Missle();
-			m.displayObject.x = 200;
-			m.y = 200;
+			m.displayObject.x = p.displayObject.x;
+			m.displayObject.y = p.displayObject.y;
 			
 			RenderHandler.addEntity(m);
 		};
