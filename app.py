@@ -1,6 +1,8 @@
 import os
 import json
 
+from collections import OrderedDict
+
 from flask import Flask, url_for,render_template, send_from_directory, request, jsonify, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -29,7 +31,6 @@ def assets(filename):
     return	send_from_directory('static/assets', filename)
 
 @app.route('/game', methods=['POST','GET'])
-@response_json
 def game():
 	if request.method == 'POST':
 		g = Game(request.data)
@@ -38,6 +39,10 @@ def game():
 		return request.json
 	else:
 		return Game.query.all()
+		
+@app.route('/game/<int:gameId>', methods=['POST','GET'])
+def game(gameId):
+	return jsonify(Game.query.get(gameId)._asdict())
 		
 class DictSerializable(object):
     def _asdict(self):
@@ -55,9 +60,7 @@ class Game(db.Model, DictSerializable):
         self.game = game
 
     def __repr__(self):
-    	return json.dumps([1,2])
-	
-
+        return self._asdict()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
