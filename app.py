@@ -1,6 +1,8 @@
 import os
 import json
 
+from functools import wraps
+
 from collections import OrderedDict
 
 from flask import Flask, url_for,render_template, send_from_directory, request, jsonify, Response
@@ -11,9 +13,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 db = SQLAlchemy(app)
 
+class DictSerializableEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, DictSerializable):
+            obj = obj._asdict()
+        else:
+            obj = super(DictSerializableEncoder, self).default(obj)
+        return obj
+
+
 def response_json(fn):
-	def tojson():
-		return Response(json.dumps(fn()),  mimetype='application/json')
+	@wraps(fn)
+	def tojson(*args, **kwargs):
+		return Response(json.dumps(fn(*args, **kwargs), cls=DictSerializableEncoder),  mimetype='application/json')
 	return tojson
 
 @app.route('/')
@@ -30,15 +42,19 @@ def hangout():
 def assets(filename):
     return	send_from_directory('static/assets', filename)
 
-@app.route('/game', methods=['POST','GET'])
-def game():
-	if request.method == 'POST':
-		g = Game(request.data)
-		db.session.add(g)
-		db.session.commit()
-		return request.json
-	else:
-		return Game.query.all()
+
+@app.route('/game', methods=['GET'])
+@response_json
+def get_game():
+	return Game.query.all()
+	
+@app.route('/game', methods=['POST'])
+@response_json
+def create_game():
+	g = Game(request.data)
+	db.session.add(g)
+	db.session.commit()
+	return request.json
 		
 @app.route('/game/<int:gameId>', methods=['POST','GET'])
 def game(gameId):
@@ -58,9 +74,6 @@ class Game(db.Model, DictSerializable):
 
     def __init__(self, game):
         self.game = game
-
-    def __repr__(self):
-        return self._asdict()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
