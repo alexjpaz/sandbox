@@ -1,5 +1,5 @@
 (function() {
-	var game = angular.module('TicTacToeGame', []);
+	var game = angular.module('TicTacToeGame', ['Utilities']);
 	
 	game.factory('GameException', function($log, $rootScope) {
 		return function() {
@@ -127,7 +127,16 @@
 		$scope.reset();
 	});
 	
-	game.directive('alert', function() {
-	});
+	game.factory('TicTacToePersistance', function($http) {
+		function TicTacToePersistance {
+			
+		}
+		
+		TicTacToePersistance.prototype.get = function() {
+			return $http.get('/someUrl');
+		}
+		
+		return TicTacToePersistance;
+	})
 	
 })();
