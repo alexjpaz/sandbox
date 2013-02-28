@@ -16,9 +16,10 @@ function Bootstrap() {
 		libs.push(path);
 	}
 
+	loadjs('lib/jquery.min'); 
     loadjs('lib/angular');
+    loadjs('lib/angular-resource');
     loadjs('lib/log4javascript');
-    loadjs('lib/jquery.min'); 
     loadjs('lib/bootstrap.min');
     loadjs('lib/less-1.3.3.min')
     

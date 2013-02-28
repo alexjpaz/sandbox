@@ -1,7 +1,18 @@
 import os
+import json
 
-from flask import Flask, url_for,render_template, send_from_directory
+from flask import Flask, url_for,render_template, send_from_directory, request, jsonify, Response
+from flask.ext.sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
+db = SQLAlchemy(app)
+
+def response_json(fn):
+	def tojson():
+		return Response(json.dumps(fn()),  mimetype='application/json')
+	return tojson
 
 @app.route('/')
 def root():
@@ -17,9 +28,36 @@ def hangout():
 def assets(filename):
     return	send_from_directory('static/assets', filename)
 
-@app.route('/hello')
-def hello():
-   return "Okay, you aren't crazy"
+@app.route('/game', methods=['POST','GET'])
+@response_json
+def game():
+	if request.method == 'POST':
+		g = Game(request.data)
+		db.session.add(g)
+		db.session.commit()
+		return request.json
+	else:
+		return Game.query.all()
+		
+class DictSerializable(object):
+    def _asdict(self):
+        result = OrderedDict()
+        for key in self.__mapper__.c.keys():
+            result[key] = getattr(self, key)
+        return result
+		
+		
+class Game(db.Model, DictSerializable):
+    id = db.Column(db.Integer, primary_key=True)
+    game = db.Column(db.Text())
+
+    def __init__(self, game):
+        self.game = game
+
+    def __repr__(self):
+    	return json.dumps([1,2])
+	
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

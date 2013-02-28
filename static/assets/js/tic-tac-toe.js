@@ -1,5 +1,5 @@
 (function() {
-	var game = angular.module('TicTacToeGame', ['Utilities']);
+	var game = angular.module('TicTacToeGame', ['Utilities', 'ngResource']);
 	
 	game.factory('GameException', function($log, $rootScope) {
 		return function() {
@@ -105,7 +105,7 @@
 		return TicTacToeBoard;
 	});
 	
-	game.controller('TicTacToeGameCtrl', function($scope, TicTacToeBoard) {
+	game.controller('TicTacToeGameCtrl', function($scope, TicTacToeBoard, TicTacToePersistance) {
 		
 		$scope.reset = function() {
 			$scope.board = new TicTacToeBoard();
@@ -124,19 +124,15 @@
 			} 
 		});
 		
+		$scope.save = function() {
+			TicTacToePersistance.save($scope.board);
+		};
+		
 		$scope.reset();
 	});
 	
-	game.factory('TicTacToePersistance', function($http) {
-		function TicTacToePersistance {
-			
-		}
-		
-		TicTacToePersistance.prototype.get = function() {
-			return $http.get('/someUrl');
-		}
-		
-		return TicTacToePersistance;
-	})
+	game.factory('TicTacToePersistance', function($resource) {
+		return $resource('/game/:gameId');
+	});
 	
 })();
