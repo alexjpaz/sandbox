@@ -34,4 +34,36 @@
 			return new ComponentFactory();
 		};
 	});
+	
+	factory.provider('RouteBuilder', function($routeProvider, TemplateUtilProvider) {
+		var TemplateUtil = TemplateUtilProvider.$get();
+		
+		function RouteBuilder() {
+			this.config = {
+				templateUrlBase: 'screen'
+			};
+			
+			this.when = function(urlPattern, templateUrl) {
+				templateUrl = TemplateUtil.resolve(this.config.templateUrlBase+"/"+templateUrl);
+				$routeProvider.when(urlPattern, {
+					templateUrl: templateUrl,
+					reloadOnSearch: false
+				});
+			};
+			
+			this.redirect = function(urlPattern, redirectUrl) {
+				
+				$routeProvider.redirect(urlPattern, redirectUrl);
+			};
+			
+			this.otherwise = function() {
+				
+			}
+		}
+		
+		this.$get = function() {
+			return new RouteBuilder();
+		}
+	});
+	
 })(angular);

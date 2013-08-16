@@ -6,7 +6,6 @@
 	    		angular.bootstrap(document, [ 'Application' ]);
 	    		console.info('Successfully Started');
 	    	} catch(e) {
-	    		alert('Exception during bootstrap: '+e.message);
 	    		console.error('Exception during bootstrap: ', e.message);
 	    		throw e;
 	    	}
@@ -40,8 +39,10 @@
 
 	loader.addjs('js/app');
 	loader.addjs('js/components/layout');
+	loader.addjs('js/components/common');
 	loader.addjs('js/utils/factory');
 	loader.addjs('js/utils/helpers');
 
 	loader.bootstrap();
 })();
+
