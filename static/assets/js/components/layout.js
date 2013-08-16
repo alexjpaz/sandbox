@@ -7,7 +7,20 @@
 		ComponentFactory.build('paz-blog', function($scope) {
 		});
 		
+
 	});
 	
+	layout.config(function(componentFactoryProvider) {
+		ComponentFactory = componentFactoryProvider.$get();
+		ComponentFactory.config.templateUrlBase = 'components/login';
+		
+		ComponentFactory.build('login', function($scope) {
+			$scope.login = {
+				user: 'useruser',
+				password: 'password',
+			}
+		});
+	});
+
 	
 })(angular);

@@ -12,6 +12,7 @@
 		var RouteBuilder = RouteBuilderProvider.$get();
 		
 		RouteBuilder.when('/', 'dashboard');
+		RouteBuilder.when('/login', 'login');
 	});
 
 })(angular);
