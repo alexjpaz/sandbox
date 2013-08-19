@@ -11,7 +11,8 @@
 	app.config(function(RouteBuilderProvider) {
 		var RouteBuilder = RouteBuilderProvider.$get();
 		
-		RouteBuilder.when('/', 'dashboard');
+		RouteBuilder.when('/', 'index');
+		RouteBuilder.when('/dashboard', 'dashboard');
 		RouteBuilder.when('/login', 'login');
 	});
 

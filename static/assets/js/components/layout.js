@@ -7,7 +7,9 @@
 		ComponentFactory.build('paz-blog', function($scope) {
 		});
 		
-
+		ComponentFactory.build('navbar', function($scope) {
+			
+		});
 	});
 	
 	layout.config(function(componentFactoryProvider) {

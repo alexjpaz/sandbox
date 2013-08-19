@@ -31,9 +31,13 @@
 	
 	loader = new Loader(Bootstrap);
 	
-	loader.addcdnjs('http://code.jquery.com/jquery-2.0.3.min.js');
-	loader.addcdnjs('https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js');
-	loader.addcdnjs('https://cdnjs.cloudflare.com/ajax/libs/less.js/1.4.1/less.min.js');
+	loader.addjs('lib/jquery/jquery-2.0.3.min');
+	loader.addjs('lib/angular/angular.min');
+	
+	loader.addjs('lib/less/less.min');
+	
+	loader.addjs('lib/headjs/head.min');
+	
 	loader.addjs('lib/ckeditor/ckeditor');
 	loader.addjs('lib/ckeditor/adapters/jquery');
 
