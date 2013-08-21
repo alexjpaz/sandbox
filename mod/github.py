@@ -69,17 +69,3 @@ def updateFile(filePath, content, message):
 def getFile(filePath):
     resp = gitapi('/repos/testuser1234567890/testuser1234567890.github.com/contents'+filePath)
     return resp
-
-def main():
-
-
-    resp = updateFile('/new-test-file.html', '<h1>this is a test 23</h1>', 'generated and agin')
-    print json.dumps(resp, indent=4)
-
-
-
-if __name__ == "__main__":
-    try:
-       main()
-    except FatalException:
-       print 'bominb out!'
